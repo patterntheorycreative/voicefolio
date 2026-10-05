@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --color-paper: #f3ecdf;
+  --color-sheet: #fffaf3;
+  --color-ink: #1c1712;
+  --color-muted: #6f655b;
+  --color-line: #e3d7c6;
+  --color-ember: #9a3412;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  body {
+    min-height: 100%;
+    font-family: var(--font-sans);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-ember);
+    color: var(--color-sheet);
+  }
+}
+
+@keyframes folio-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+}
+
+.folio-pulse {
+  animation: folio-pulse 1.3s ease-in-out infinite;
+}
+
+@keyframes folio-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(280%);
+  }
+}
+
+.folio-bar {
+  height: 2px;
+  overflow: hidden;
+  background: var(--color-line);
+}
+
+.folio-bar > span {
+  display: block;
+  height: 100%;
+  width: 36%;
+  background: var(--color-ember);
+  animation: folio-slide 1.05s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-pulse,
+  .folio-bar > span {
+    animation: none;
+  }
+
+  .folio-bar > span {
+    width: 100%;
+  }
+}
